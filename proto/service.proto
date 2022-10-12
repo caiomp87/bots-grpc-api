@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+
+import "google/protobuf/timestamp.proto";
+
+message Empty {}
+
+message Bot {
+    string userID = 1;
+    string squad = 2;
+    string strategy = 3;
+    string name = 4;
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+}
+
+message CreateBotRequest {
+    string userID = 1;
+    string squad = 2;
+    string strategy = 3;
+    string name = 4;
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+}
+
+message CreateBotResponse {
+    string message = 1;
+}
+
+message FindBotsResponse {
+    repeated Bot bots = 1;
+}
+
+service BotService {
+    rpc CreateBot(CreateBotRequest) returns (CreateBotResponse) {}
+    rpc FindBots(Empty) returns (FindBotsResponse) {}
+}
